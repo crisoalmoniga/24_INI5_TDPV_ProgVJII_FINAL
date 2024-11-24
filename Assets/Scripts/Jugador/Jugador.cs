@@ -22,7 +22,7 @@ public class Jugador : MonoBehaviour
 
     private void Start()
     {
-        //perfilJugador.Vida = vidasIniciales; // Inicializamos la vida del jugador con el valor de vidasIniciales
+        perfilJugador.Vida = vidasIniciales; // Inicializamos la vida del jugador con el valor de vidasIniciales
         OnLivesChanged.Invoke(perfilJugador.Vida);
         OnTextChanged.Invoke(GameManager.Instance.GetScore().ToString());
     }

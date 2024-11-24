@@ -82,4 +82,13 @@ public class GameManager : MonoBehaviour
     {
         return score;
     }
+
+
+    public void GameOver()
+    {
+        Debug.Log("Vidas agotadas. Regresando a la pantalla de inicio.");
+        SceneManager.LoadScene("Portada");
+    }
+
+
 }

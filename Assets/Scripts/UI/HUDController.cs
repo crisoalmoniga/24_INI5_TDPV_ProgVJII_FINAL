@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class HUDController : MonoBehaviour
 {
@@ -43,6 +44,15 @@ public class HUDController : MonoBehaviour
 
     public void ActualizarVidasHUD(int vidas)
     {
+        Debug.Log($"ActualizarVidasHUD llamado con vidas: {vidas}");
+
+        if (vidas <= 0)
+        {
+            Debug.Log("Vidas agotadas. Regresando a la pantalla de inicio.");
+            SceneManager.LoadScene("Portada"); // Cambia "Portada" por el nombre de tu escena
+            return;
+        }
+
         if (EstaVacioContenedor())
         {
             CargarContenedor(vidas);
@@ -58,6 +68,9 @@ public class HUDController : MonoBehaviour
             CrearIcono();
         }
     }
+
+
+
 
     private bool EstaVacioContenedor()
     {
@@ -77,6 +90,8 @@ public class HUDController : MonoBehaviour
 
     private void CargarContenedor(int cantidadIconos)
     {
+        if (cantidadIconos <= 0) return;
+
         for (int i = 0; i < cantidadIconos; i++)
         {
             CrearIcono();
