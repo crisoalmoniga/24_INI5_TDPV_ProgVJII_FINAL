@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            score = 1000;
+            score = Mathf.Max(PlayerPrefs.GetInt("Puntaje"),0);
         }
         else
         {
@@ -69,20 +69,8 @@ public class GameManager : MonoBehaviour
     public void AddScore(int points)
     {
         score += points;
-        Debug.Log("Puntaje actualizado a: " + score);
-
-        if (score <= 0)
-        {
-            if (ApplicationManager.Instance != null)
-            {
-                Debug.Log("Cambiando a la escena previa...");
-                ApplicationManager.Instance.GoToPreviousScene();
-            }
-            else
-            {
-                Debug.LogError("ApplicationManager.Instance es null. Asegúrate de que esté en la escena.");
-            }
-        }
+        if (score < 0) score = 0;
+        PlayerPrefs.SetInt("Puntaje", score);
     }
 
     public void ResetScore()

@@ -9,7 +9,7 @@ public class HUDController : MonoBehaviour
 
     [SerializeField] GameObject iconoVida;
     [SerializeField] GameObject contenedorIconosVida;
-
+    [SerializeField] GameObject menuConfig;
 
     private void OnEnable()
     {
@@ -27,27 +27,25 @@ public class HUDController : MonoBehaviour
     {
 
         ActualizarTextoHUD("PAUSADO");
+        menuConfig.SetActive(true);
     }
 
     private void Reanudar()
     {
+        menuConfig.SetActive(false);
         ActualizarTextoHUD(GameManager.Instance.GetScore().ToString());
-
     }
 
     public void ActualizarTextoHUD(string nuevoTexto)
     {
-        Debug.Log("SE LLAMA " + nuevoTexto);
         miTexto.text = nuevoTexto;
     }
 
     public void ActualizarVidasHUD(int vidas)
     {
-        Debug.Log("Llamada a ActualizarVidasHUD con " + vidas + " vidas.");
         if (EstaVacioContenedor())
         {
             CargarContenedor(vidas);
-            Debug.Log("Cantidad de iconos tras cargar: " + CantidadIconosVidas());
             return;
         }
 
@@ -59,7 +57,6 @@ public class HUDController : MonoBehaviour
         {
             CrearIcono();
         }
-        Debug.Log("Cantidad de iconos tras actualización: " + CantidadIconosVidas());
     }
 
     private bool EstaVacioContenedor()
@@ -88,8 +85,6 @@ public class HUDController : MonoBehaviour
 
     private void CrearIcono()
     {
-        Debug.Log("Instanciando un nuevo icono de vida");
-        Instantiate(iconoVida, contenedorIconosVida.transform);    
+        Instantiate(iconoVida, contenedorIconosVida.transform);
     }
 }
-
