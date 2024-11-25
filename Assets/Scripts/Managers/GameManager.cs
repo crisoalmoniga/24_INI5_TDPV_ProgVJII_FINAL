@@ -90,5 +90,13 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Portada");
     }
 
+    public void GanarJuego()
+    {
+        Debug.Log("Ganaste! Redirigiendo a la pantalla de inicio.");
+        SceneManager.LoadScene("Portada"); // Cambia "Portada" por el nombre exacto de tu escena
+    }
+
 
 }
+
+
