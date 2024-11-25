@@ -13,7 +13,7 @@ public class Mover : MonoBehaviour
     private Rigidbody2D miRigidbody2D;
     private Animator miAnimator;
     private SpriteRenderer miSprite;
-    private CircleCollider2D miCollider2D;
+    private BoxCollider2D miCollider2D;
     private Jugador jugador;
 
     private int saltarMask;
@@ -24,7 +24,7 @@ public class Mover : MonoBehaviour
         miRigidbody2D = GetComponent<Rigidbody2D>();
         miAnimator = GetComponent<Animator>();
         miSprite = GetComponent<SpriteRenderer>();
-        miCollider2D = GetComponent<CircleCollider2D>();
+        miCollider2D = GetComponent<BoxCollider2D>();
         saltarMask = LayerMask.GetMask("Pisos", "Plataformas");
         jugador = GetComponent<Jugador>();
     }
