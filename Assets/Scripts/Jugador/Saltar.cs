@@ -12,7 +12,7 @@ public class Saltar : MonoBehaviour
     private Rigidbody2D miRigidbody2D;
     private AudioSource miAudioSource;
 
-    [SerializeField] private LayerMask capaPisos; // Asegúrate de asignar "Pisos" en el Inspector
+    [SerializeField] private LayerMask capaPisos;
 
     private void Awake()
     {

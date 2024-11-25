@@ -49,7 +49,7 @@ public class HUDController : MonoBehaviour
         if (vidas <= 0)
         {
             Debug.Log("Vidas agotadas. Regresando a la pantalla de inicio.");
-            SceneManager.LoadScene("Portada"); // Cambia "Portada" por el nombre de tu escena
+            SceneManager.LoadScene("Portada");
             return;
         }
 
