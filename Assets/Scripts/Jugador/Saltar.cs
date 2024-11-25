@@ -4,39 +4,33 @@ using UnityEngine;
 
 public class Saltar : MonoBehaviour
 {
-
     private Jugador jugador;
 
-    // Variables de uso interno en el script
     private bool puedoSaltar = true;
     private bool saltando = false;
 
-    // Variable para referenciar otro componente del objeto
     private Rigidbody2D miRigidbody2D;
     private AudioSource miAudioSource;
 
-    // Codigo ejecutado cuando el objeto se activa en el nivel
+    [SerializeField] private LayerMask capaPisos; // Asegúrate de asignar "Pisos" en el Inspector
+
     private void Awake()
     {
         jugador = GetComponent<Jugador>();
-    }
-
-    private void OnEnable()
-    {
         miRigidbody2D = GetComponent<Rigidbody2D>();
         miAudioSource = GetComponent<AudioSource>();
-        jugador = GetComponent<Jugador>();
     }
 
-    // Codigo ejecutado en cada frame del juego (Intervalo variable)
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && puedoSaltar)
         {
             puedoSaltar = false;
 
-            if (miAudioSource.isPlaying) { return; }
-            miAudioSource.PlayOneShot(jugador.PerfilJugador.JumpSFX);
+            if (miAudioSource != null && jugador.PerfilJugador.JumpSFX != null)
+            {
+                miAudioSource.PlayOneShot(jugador.PerfilJugador.JumpSFX);
+            }
         }
     }
 
@@ -44,19 +38,24 @@ public class Saltar : MonoBehaviour
     {
         if (!puedoSaltar && !saltando)
         {
+            miRigidbody2D.velocity = new Vector2(miRigidbody2D.velocity.x, 0); // Resetea velocidad vertical
             miRigidbody2D.AddForce(Vector2.up * jugador.PerfilJugador.FuerzaSalto, ForceMode2D.Impulse);
             saltando = true;
         }
     }
 
-    // Codigo ejecutado cuando el jugador colisiona con otro objeto
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        puedoSaltar = true;
-        saltando = false;
+        // Verifica si colisiona con un objeto en la capa "Pisos"
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Pisos"))
+        {
+            puedoSaltar = true;
+            saltando = false;
 
-        if(miAudioSource.isPlaying) { return; }
-        miAudioSource.PlayOneShot(jugador.PerfilJugador.CollisionSFX);
+            if (miAudioSource != null && jugador.PerfilJugador.CollisionSFX != null)
+            {
+                miAudioSource.PlayOneShot(jugador.PerfilJugador.CollisionSFX);
+            }
+        }
     }
-
 }
